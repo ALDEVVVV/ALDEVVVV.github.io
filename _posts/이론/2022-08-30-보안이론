@@ -1,0 +1,246 @@
+# 운영체제
+
+프로세스 제어 블록 : PCB
+
+- 운영체제가 프로세스에 대한 중요한 정보를 저장해 놓은 곳(프로세스 정보 리스트)
+- OS에게 Process에 대한 정보를 제공해주는 자료구조 테이블
+
+
+
+프로세스 스케쥴링
+
+1. 선점(Preemptive)
+
+   - 현재 프로세스로부터 프로세서를 빼앗을 수 있는 방식으로 높은 우선순위 프로세스로 부터
+
+     긴급 처리 요구에 유용하며 실시간 프로세스, 대화식 시분할 시스템에서 빠른 응답이 가능
+
+2. 비선점(Non-Preemptive)
+
+   - 프로세스에게 할당 된 프로세스를 빼앗을 수 없는 방식 활용(선입선출 FIFO,FCFS) 기한부 스케줄링 최소작업(SJF) 스케줄링
+
+교착상태 발생조건
+
+	1. 상호배제 : 프로세스들이 각각 필요 자원에 대해 배타적 통제권을 요구
+	1. 점유와 대기 : 다른 자원을 요구하며 자신에게 할당된 자원을 해재하지 않을 때
+	1. 비 중단 조건(Non-preemption) : 프로세스에 할당된 자원을 끝날 떄 까지 해재할 수 없을 때
+	1. 환형 대기 조건 : 프로세스들이 순환을 이루어야 하며 구성하는 각 프로세스 순환 내의 이전 프로세스가 요청하는 자원을 점유하고 다음 프로세스가 점유하는 자원을 요구
+
+
+
+페이징처리 , 프로세스 처리 등은 방법이 다 비슷함
+
+
+
+OS는 바이오스에서 특정 장소에 매칭시켜주어서 순차적으로 부팅됨
+
+
+
+Unix Permission
+
+​	umask랑 setuid setgid 중요함
+
+보통 루트권한을 뺏으려고 할때 #find / -perm 4000 -print
+
+BOF(Buffer of flow) : 열려진 포트(로그인 창)등에 허용가능한 범위를 넘어서 입력뒤에 원하는 쉘값을 입력하여 해킹
+
+etc/hosts.deny - all all
+
+etc/hosts.allow - 사용하는 포트만
+
+
+
+배치작업도 해킹이 자주일어남
+
+at , crontab (crontab -e 는 계정마다 다운)
+
+
+
+요즘에는 클라이언트(End point)보안이 중시됨
+
+윈도우 보안 - 공유폴더
+
+기본적으로 ADMIN$,IPC$,C$ 등이 공유가 된다
+
+해결책 : 레지스트리 수정
+
+
+
+SSL(Secure Socket Layer)
+
+443 port , transport ~ application 계층에서 동작
+
+비밀성 무결성 인증의 세가지 보안 서비스를 제공하며 효율성을 위해 데이터 압출 기능도 제공
+
+
+
+SSL 기본 인증 과정
+
+1. 서버 보증서(certificate)를 얻는다
+2. 리소스에 접근할 때 보안 채널을 요구
+3. 기본 인증만을 사용
+4. 보안 영역의 방문자에게 https라는 URL 포맷을 사용하도록 알려준다
+
+
+
+SSL3.0 : TLS
+
+
+
+nmap (포트스캐닝)만 해도 해킹으로 간주됨
+
+
+
+리눅스에서 .so 가 윈도우의 dll이라고 생각하면 됨
+
+
+
+접근통제
+
+보통은 역할기반 접근 통제(Role-Based Access Control) 을 많이 사용함
+
+
+
+DB보안
+
+1. DB암호화
+2. 접근통제
+
+
+
+대기업같은경우 SSL인증서 교체로 post한 내용등이 확인가능하다
+
+로그는 따로 디스크를 나누고 초반에는 다남기고 나중에는 중요한 것들만 남김
+
+
+
+스푸핑 : IP주소 등의 정보를 속임으로써 권한 획득하고 ㅈ우요 정보 가로채고 서비스 방해
+
+스니핑 : 네트워크 패킷이나 버스를 통해 전달되는 중요정보 엿보고 가로채는 공격
+
+Denial of Service(DOS) : 대량의 패킷을 이용하여 네트워크 마비시키거나 특정 서비스의 수행을 방해
+
+
+
+UID등에 대해서 공격하는 방식은 Race Condition(경쟁 조건 방식)을 이용
+
+
+
+drm에서 txt파일은 안걸림
+
+IFS를 이용하여 해킹하는 방식도 있음(Foramt String)
+
+
+
+TCP Wrapper = Super Demon (방화벽마냥 연결해주는 역할)
+
+
+
+FTP는 액티브모드 패시브모드가있음
+
+액티브모드는 20번 포트가 막혀있으면 전송이안되지만 패시브모드는 1024이상의 임의포트를 열고 전송함
+
+SSL의 표준은 TLS이다. (X.509)
+
+
+
+LDAP(light directory access protocol)
+
+
+
+Injection 공격 방어 : 권한 축소 입력 값 확인 등을 통하여 가능
+
+
+
+DB는 원격제어 소산백업(로컬에다 하지말고 다른곳에)
+
+
+
+제일 많이쓰는 블록암호 알고리즘 AES128
+
+​	Felstel구조 : DES
+
+​	SPN 구조 : AES
+
+
+
+공개키 알고리즘
+
+
+
+DRM(Digital Rights Management) - ex(멜론전용음악파일)
+
+
+
+MITRE ATT&CK 는 모든 보안기술과 취약점 등을 다 들어 가 있음
+
+
+
+OSI 7 Layer 알아둬야함
+
+
+
+L4  Switch가 로드밸런싱등을할때
+
+
+
+STP(Spanning-Tree Port) Port Status : 패킷이 계속 돌아서 증폭되어 죽는 경우를 방지
+
+​	Blocking - BPDU만 수신 전원이 처음 들어올 때 모든 port Blocking
+
+​	Listening - BPDU만 수신 네트워크에 루프 발생 여부 확인
+
+​	Learning - MAC Address를 학습하여 Table 구성하나 Frame는 Forward하지 않음
+
+​	Forwarding - 포트의 모든 Data를 송수신 한다.
+
+
+
+네트워크 스위치는 xor연산 밖에 할 수 없음
+
+Subnet계산기가 따로 있음
+
+Supernet은 합치는것
+
+
+
+TCP연결지향형
+
+UDP비연결 ( 보내고 끝 )
+
+UDP는 보통 스트리밍 음성통신 등을 할 때 사용함(요즘 신뢰성이 높아졌음)
+
+
+
+비신뢰성 등은 UDP로 통신 많이함
+
+
+
+DNS등도 많이 공격받아서 Secure-DNS등이 생겼음
+
+
+
+DHCP(Dynamic Host Configuration Protocol) 자동으로 네트워크 설정해줌
+
+
+
+모든공격의 기본은 스캔 
+
+
+
+Promiscuous Mode 자신을 통과하는 모든 패킷을 받아들임
+
+
+
+시스템은 이중화로해야함 STOF 
+
+
+
+VPN(IPSEC,SSL VPN)
+
+암호화 장비를 설치하고 보안 터널을 구성하여 보호하는 것
+
+
+
+정보보호 관리체계 모델(Information Security Management System/ISMS) P가붙으면 개인정보까지
+
